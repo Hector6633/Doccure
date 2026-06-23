@@ -28,7 +28,13 @@ def admin_only(view_func):
         group = None
         if request.user.groups.exists():
             group = request.user.groups.all()[0].name
-        if group == 'customers': 
+        if group == 'patients': 
+            return redirect('index')
+        if group == 'doctors': 
+            return redirect('doctor_dashboard')
+        if group == 'staff': 
+            return redirect('index')
+        if group == 'nurse': 
             return redirect('index')
         if group == 'admin':
             return view_func(request, *args, **kwargs)

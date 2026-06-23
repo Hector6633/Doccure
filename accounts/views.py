@@ -8,6 +8,9 @@ from . auth import unauthenticated_user
 def index(request):
     return render(request, 'index.html')
 
+def doctor_dashboard(request):
+    return render(request, 'doctor-dashboard.html')
+
 @unauthenticated_user
 def register(request):
     if request.method == 'POST':

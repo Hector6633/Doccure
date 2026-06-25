@@ -71,10 +71,24 @@
 								</ul>
 							</li>	
 							{% endif %}
+							{% if request.user.is_staff %}
+							<li class="has-submenu">
+								<a href="#">Reception <i class="fas fa-chevron-down"></i></a>
+								<ul class="submenu">
+									<li><a href="{% url "reception_dashboard" %}">Dashboard</a></li>
+									<li><a href="appointments.html">Register Patients</a></li>
+									<li><a href="schedule-timings.html">Patient List</a></li>
+									<li><a href="my-patients.html">Book Appointment</a></li>
+									<li><a href="patient-profile.html">Calender</a></li>
+									<li><a href="chat-doctor.html">Payments</a></li>
+								</ul>
+							</li>	
+							{% endif %}
+							{% if user.is_authenticated %}
 							<li class="has-submenu">
 								<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
-									<li><a href="search.html">Search Doctor</a></li>
+									<li><a href="{% url "patient_dashboard" %}">Dashboard</a></li>
 									<li><a href="doctor-profile.html">Medical History</a></li>
 									<li><a href="booking.html">Make Appointments</a></li>
 									<li><a href="checkout.html">My Appointments</a></li>
@@ -84,28 +98,20 @@
 									<li><a href="chat.html">Invoices</a></li>
 									<li><a href="profile-settings.html">Profile Settings</a></li>
 								</ul>
-							</li>	
+							</li>
+							{% endif %}
+							{% if request.user.is_staff %}	
 							<li class="has-submenu">
 								<a href="#">Nurse <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
-									<li><a href="voice-call.html">Search Nurse</a></li>
-									<li><a href="search.html">Nurse Dashboard</a></li>
-									<li><a href="calendar.html">Calendar</a></li>
-									<li><a href="components.html">Components</a></li>
-									<li class="has-submenu">
-										<a href="invoices.html">Invoices</a>
-										<ul class="submenu">
-											<li><a href="invoices.html">Invoices</a></li>
-											<li><a href="invoice-view.html">Invoice View</a></li>
-										</ul>
-									</li>
-									<li><a href="blank-page.html">Starter Page</a></li>
-									<li><a href="login.html">Login</a></li>
-									<li><a href="register.html">Register</a></li>
-									<li><a href="forgot-password.html">Forgot Password</a></li>
-									<li><a href="{% url "logout" %}">Logout</a></li>
+									<li><a href="{% url "nurse_dashboard" %}">Nurse Dashboard</a></li>
+									<li><a href="calendar.html">Patient List</a></li>
+									<li><a href="components.html">Clinical Notes</a></li>
+									<li><a href="blank-page.html">Today Queues</a></li>
+									<li><a href="login.html">Medicine</a></li>
 								</ul>
 							</li>
+							{% endif %}
 							<li class="has-submenu">
 								<a href="#">Accounts <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
@@ -113,17 +119,19 @@
 									<li><a href="{% url "register" %}">Register Account</a></li>
 									<li><a href="components.html">Account Profile</a></li>
 									<li><a href="{% url "login" %}">Login</a></li>
+									{% if user.is_authenticated %}
 									<li><a href="{% url "logout" %}">Logout</a></li>
+									{% endif %}
 								</ul>
 							</li>
-							<li>
+							{% comment %} <li>
 								<a href="admin/index.html" target="_blank">Admin</a>
-							</li>
+							</li> {% endcomment %}
 							<li>
 								{% if user.is_authenticated %}
 								<a href="{% url "index" %}">Hello, {{user.username}}</a>
 								{% else %}
-								<a href="{% url "index" %}">Hello,</a>
+								<a href="{% url "index" %}">Hello, I'm Doccure</a>
 								{% endif %}
 							</li>
 							<li class="login-link">
@@ -138,7 +146,7 @@
 							</div>
 							<div class="header-contact-detail">
 								<p class="contact-header">Contact</p>
-								<p class="contact-info-header"> +1 315 369 5943</p>
+								<p class="contact-info-header"> +91 9287672041</p>
 							</div>
 						</li>
 						<li class="nav-item">
@@ -260,7 +268,7 @@
 							<div class="row">
 								<div class="col-md-6 col-lg-6">
 									<div class="copyright-text">
-										<p class="mb-0"><a href="templateshub.net">Templates Hub</a></p>
+										<p class="mb-0">Designed by <a href="https://stacklance.pythonanywhere.com">Stacklance Tech</a></p>
 									</div>
 								</div>
 								<div class="col-md-6 col-lg-6">
@@ -268,8 +276,8 @@
 									<!-- Copyright Menu -->
 									<div class="copyright-menu">
 										<ul class="policy-menu">
-											<li><a href="term-condition.html">Terms and Conditions</a></li>
-											<li><a href="privacy-policy.html">Policy</a></li>
+											<li><a href="{% url "terms_condition" %}">Terms and Conditions</a></li>
+											<li><a href="{% url "privacy_policy" %}">Privacy Policy</a></li>
 										</ul>
 									</div>
 									<!-- /Copyright Menu -->

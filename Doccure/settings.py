@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'livereload',
     'template_partials',
+    'UI',
     'accounts',
 ]
 
